@@ -16,6 +16,7 @@ import UserUnregisterController from "../Controllers/User-unregister.controller"
 
 const UserRouter = Express.Router();
 
+// ROUTES BELOW
 UserRouter.post("/register", UserRegisterDTO, UserRegisterController);
 UserRouter.post("/login", UserLoginDTO, UserLoginController);
 
