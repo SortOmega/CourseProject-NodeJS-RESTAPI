@@ -10,6 +10,7 @@ import {
   password_userDTOSchema,
   surname_userDTOSchema,
 } from "./DTO_Types";
+import { ResponseBasicData } from "../Functions/Server-Responses";
 
 const RegisterDTOSchema = Type.Object(
   {
@@ -48,7 +49,10 @@ const UserRegisterDTO = (
 
   if (!isDTOValid)
     return Respuesta.status(400).send(
-      ajv.errorsText(validateUserSchema.errors, { separator: "\n" })
+      ResponseBasicData(
+        400,
+        ajv.errorsText(validateUserSchema.errors, { separator: "\n" })
+      )
     );
   return Siguiente();
 };

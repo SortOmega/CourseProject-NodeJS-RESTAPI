@@ -4,6 +4,7 @@ import addFormats from "ajv-formats";
 import addErrors from "ajv-errors";
 import { NextFunction, Response, Request } from "express";
 import { email_userDTOSchema, password_userDTOSchema } from "./DTO_Types";
+import { ResponseBasicData } from "../Functions/Server-Responses";
 
 const UpdateEmailDTOSchema = Type.Object(
   {
@@ -37,10 +38,12 @@ const UserUpdateEmailDTO = (
 
   const isDTOValid = validateUserSchema(Solicitud.body);
 
-  if (!isDTOValid)
-    return Respuesta.status(400).send(
-      ajv.errorsText(validateUserSchema.errors, { separator: "\n" })
-    );
+  const error400 = ResponseBasicData(
+    400,
+    ajv.errorsText(validateUserSchema.errors, { separator: "\n" })
+  );
+
+  if (!isDTOValid) return Respuesta.status(error400.Id).send(error400);
   return Siguiente();
 };
 

@@ -3,6 +3,7 @@ import Ajv from "ajv";
 import addErrors from "ajv-errors";
 import { NextFunction, Response, Request } from "express";
 import { password_userDTOSchema } from "./DTO_Types";
+import { ResponseBasicData } from "../Functions/Server-Responses";
 
 const UpdatePasswordDTOSchema = Type.Object(
   {
@@ -34,10 +35,12 @@ const UserUpdatePasswordDTO = (
 
   const isDTOValid = validateUserSchema(Solicitud.body);
 
-  if (!isDTOValid)
-    return Respuesta.status(400).send(
-      ajv.errorsText(validateUserSchema.errors, { separator: "\n" })
-    );
+  const error400 = ResponseBasicData(
+    400,
+    ajv.errorsText(validateUserSchema.errors, { separator: "\n" })
+  );
+
+  if (!isDTOValid) return Respuesta.status(error400.Id).send(error400);
   return Siguiente();
 };
 

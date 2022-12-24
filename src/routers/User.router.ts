@@ -9,9 +9,9 @@ import UserUnregisterDTO from "../DTO/User_unregister.dto";
 import UserRegisterController from "../Controllers/User-register.controller";
 import UserLoginController from "../Controllers/User-login.controller";
 import UserProfileController from "../Controllers/User-profile.controller";
-import UserUpdateDataController from "../Controllers/User-updare-data.controller";
-import UserUpdateEmailController from "../Controllers/User-updare-email.controller";
-import UserUpdatePasswordController from "../Controllers/User-updare-password.controller";
+import UserUpdateDataController from "../Controllers/User-update-data.controller";
+import UserUpdateEmailController from "../Controllers/User-update-email.controller";
+import UserUpdatePasswordController from "../Controllers/User-update-password.controller";
 import UserUnregisterController from "../Controllers/User-unregister.controller";
 
 const UserRouter = Express.Router();

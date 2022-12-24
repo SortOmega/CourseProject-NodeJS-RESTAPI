@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import UserModel from "../Schemas/User.schema";
+import { ResponseBasicData } from "../Functions/Server-Responses";
 
 const UserUpdateDataController = async (
   _Solicitud: Request,
@@ -11,17 +12,21 @@ const UserUpdateDataController = async (
 
   const { name, surname } = _Solicitud.body;
 
-  const error401: string = "Usuario no Autorizado!";
+  // ------- STATUS RESPONSES ------- //
+  const error401 = ResponseBasicData(401, "Usuario no Autorizado!");
+  const Success = ResponseBasicData(200, "Usuario actualizado Correctamente!");
 
+  // ------- VALIDATING FROM MongoDB ------- //
   const usuarioExistenteByID = await UserModel.findById(id);
-  if (!usuarioExistenteByID) return Respuesta.status(401).send(error401);
+  if (!usuarioExistenteByID)
+    return Respuesta.status(error401.Id).send(error401);
 
   usuarioExistenteByID.name = name;
   usuarioExistenteByID.surname = surname;
 
   await usuarioExistenteByID.save();
 
-  return Respuesta.send("Usuario actualizado Exitosamente");
+  return Respuesta.send(Success);
 };
 
 export default UserUpdateDataController;

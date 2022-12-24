@@ -1,13 +1,19 @@
+const ResponseBasicData = (Id: number, responseMessage: string) => {
+  return {
+    Id,
+    responseMessage,
+  };
+};
+
 const ResponseLoginData = (
   Id: number,
   responseMessage: string,
   jwt: string
 ) => {
   return {
-    Id,
-    responseMessage,
     jwt,
+    ...ResponseBasicData(Id, responseMessage),
   };
 };
 
-export { ResponseLoginData };
+export { ResponseBasicData, ResponseLoginData };

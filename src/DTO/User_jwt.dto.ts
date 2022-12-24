@@ -1,8 +1,7 @@
 //import Dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
 import { jwtVerify } from "jose";
-
-//Dotenv.config();
+import { ResponseBasicData } from "../Functions/Server-Responses";
 
 const UserJWT_DTO = async (
   Solicitud: Request,
@@ -12,12 +11,14 @@ const UserJWT_DTO = async (
   console.log("\n---------------------------------");
   const { authorization } = Solicitud.headers;
 
-  if (!authorization)
-    return Respuesta.status(401).send("Usuario no Autorizado!");
+  // ------- STATUS RESPONSES ------- //
+  const error401 = ResponseBasicData(401, "Usuario no Autorizado!");
+
+  if (!authorization) return Respuesta.status(error401.Id).send(error401);
 
   //Hacer esto solo si se envia directamente desde el Auth > Bearer en solicitudes GET
   const jwt = authorization.split(" ")[1];
-  if (!jwt) return Respuesta.status(401).send("Usuario no Autorizado!"); //*/
+  if (!jwt) return Respuesta.status(error401.Id).send(error401); //*/
 
   try {
     const Encoder = new TextEncoder();
@@ -36,7 +37,7 @@ const UserJWT_DTO = async (
     return Siguiente();
   } catch (error) {
     console.log(error);
-    return Respuesta.status(401).send("Usuario no Autorizado!");
+    return Respuesta.status(error401.Id).send(error401);
   }
 };
 
