@@ -4,6 +4,35 @@
 
 Aplicación web API REST CRUD, elaborada mediante Node.js y Express.js, basado en el proyecto del Curso de Node.js del Youtuber del canal "Desarrollo Útil". El lenguaje utilizado fue Typescript, para darle agregarle un poco de diferencia y complejitud al proyecto. Mas información detallada sobre el proyecto se puede encontrar en el repositorio oficial del Youtuber "Desarrollo Útil".
 
+## Uso de API / API Usage
+
+- **_ES:_** Ruta Principal.
+- **_EN:_** Main Route
+
+```
+[<ServerIP>:<port>]/api/
+```
+
+### _-> User Router EndPoints_
+
+- #### _user/register_
+
+```
+POST /api/user/register
+```
+
+&emsp;_Request Body_: "application/json"
+
+```
+{
+    "_id": "uuid string format",
+    "name": "string",
+    "surname": "string",
+    "email": "email string format",
+    "password": "string"
+}
+```
+
 ## Paquetes Usados
 
 - ✅ express
@@ -45,7 +74,7 @@ npm install
 
 ## Scripts del Proyecto
 
-- Iniciar la configuracion de typescript desde npm, obviando el primer parametro (que representa a npm) y el segundo paramentro con 'init' (que representa a tsc)
+- Iniciar la configuracion de typescript desde npm, obviando el primer parametro (que representa a npm) y el segundo parametro con 'init' (que representa a tsc)
 
 ```
 npm run tsc -- --init
@@ -73,3 +102,9 @@ npm start
 
 - Curso de Node.js y Express.js: [Desarrollo Útil](https://www.youtube.com/playlist?list=PL3aEngjGbYhnrRfZKMxzn79qdgPxL7OWM)
 - Repositorio fuente basado del curso y del proyecto: [Desarrollo Útil](https://github.com/Desarrollo-Util/user-management-yt)
+
+## Screenshots
+
+![](Screenshots/screenshot01.png?raw=true "EndPoint - user/register")
+![](Screenshots/screenshot02.png?raw=true "EndPoint - user/login")
+![](Screenshots/screenshot03.png?raw=true "EndPoint - user/profile")
