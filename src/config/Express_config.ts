@@ -1,14 +1,14 @@
 import Express from "express";
-import UserRouter from "../routers/User.router";
+import mainAPI from "../routers/API.router";
 import { Cors, CorsHeaders, corsOptions } from "./CORS-config";
 const ExpressApp = Express();
 
 // CONFIGURE ROUTES WITH CORS
-UserRouter.options("*", Cors(corsOptions));
+mainAPI.options("*", Cors(corsOptions));
 //TO DO: Ingrese todo el codigo de configuracion abajo
 //  ##  MIDLEWARES
 ExpressApp.use(Express.json());
 //  ##  ROUTES
-ExpressApp.use("/user", CorsHeaders, UserRouter);
+ExpressApp.use("/api", CorsHeaders, mainAPI);
 //-------------------------------------------------------------
 export default ExpressApp;
