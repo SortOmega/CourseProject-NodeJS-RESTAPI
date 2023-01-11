@@ -11,6 +11,10 @@ import {
   surname_userDTOSchema,
 } from "./DTO_Types";
 import { ResponseBasicData } from "../Functions/Server-Responses";
+import {
+  Email_OmegaSupport,
+  Password_UpperLowerDigit,
+} from "../config/RegEx-config";
 
 const RegisterDTOSchema = Type.Object(
   {
@@ -33,7 +37,8 @@ const ajv = new Ajv({ allErrors: true })
   .addKeyword("modifier");
 
 addFormats(ajv, ["email", "uuid"]);
-ajv.addFormat("password", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/);
+ajv.addFormat("email", Email_OmegaSupport);
+ajv.addFormat("password", Password_UpperLowerDigit);
 addErrors(ajv);
 
 const validateUserSchema = ajv.compile(RegisterDTOSchema);

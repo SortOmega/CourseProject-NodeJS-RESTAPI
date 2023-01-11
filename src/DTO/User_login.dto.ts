@@ -5,6 +5,10 @@ import addErrors from "ajv-errors";
 import { NextFunction, Response, Request } from "express";
 import { email_userDTOSchema, password_userDTOSchema } from "./DTO_Types";
 import { ResponseLoginData } from "../Functions/Server-Responses";
+import {
+  Email_OmegaSupport,
+  Password_UpperLowerDigit,
+} from "../config/RegEx-config";
 
 const LoginDTOSchema = Type.Object(
   {
@@ -24,7 +28,8 @@ const ajv = new Ajv({ allErrors: true })
   .addKeyword("modifier");
 
 addFormats(ajv, ["email"]);
-ajv.addFormat("password", /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).*$/);
+ajv.addFormat("email", Email_OmegaSupport);
+ajv.addFormat("password", Password_UpperLowerDigit);
 addErrors(ajv);
 
 const validateUserSchema = ajv.compile(LoginDTOSchema);

@@ -29,7 +29,8 @@ export const email_userDTOSchema = Type.String({
   format: "email",
   errorMessage: {
     type: "El tipo de email debe ser un string!",
-    format: "El formato del email no es válido, debe cumplir el RFC 5322",
+    format:
+      'El formato del email no es válido, debe cumplir el RFC 5322, cuyo dominio debe ser "@omega.support.com"',
   },
 });
 
